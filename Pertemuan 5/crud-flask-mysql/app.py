@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.secret_key = 'secret123'
 
-# Konfigurasi koneksi MySQL
+#konfigurasi ke mysql
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Scendy@1904'
@@ -12,7 +12,7 @@ app.config['MYSQL_DB'] = 'crud_db'
 
 mysql = MySQL(app)
 
-# READ - Tampilkan semua data
+#nampilkan data
 @app.route('/')
 def index():
     cur = mysql.connection.cursor()
@@ -21,7 +21,7 @@ def index():
     cur.close()
     return render_template('index.html', dtstok=data)
 
-# CREATE - Tambah data
+#tambah data
 @app.route('/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def add():
 
     return render_template('add.html')
 
-# UPDATE - Edit data
+#edit data
 @app.route('/edit/<id>', methods=['GET', 'POST'])
 def edit(id):
     cur = mysql.connection.cursor()
@@ -59,7 +59,7 @@ def edit(id):
         cur.close()
         return render_template('edit.html', dtstok=data)
 
-# DELETE - Hapus data
+#hapus data
 @app.route('/delete/<id>', methods=['GET'])
 def delete(id):
     cur = mysql.connection.cursor()
