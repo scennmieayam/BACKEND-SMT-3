@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Kamar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tambah Kamar</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+                <label for="nomor_kamar">Nomor Kamar :</label>
+                <input type="text" name="nomor_kamar" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="tipe_kamar">Tipe Kamar :</label>
+                <input type="text" name="tipe_kamar" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="harga_per_malam">Harga per Malam :</label>
+                <input type="number" name="harga_per_malam" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="status">Status :</label>
+                <select name="status" class="form-control" required>
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Dipesan">Dipesan</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="foto">Foto Kamar :</label>
+                <input type="file" name="foto" class="form-control" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
