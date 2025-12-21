@@ -9,7 +9,7 @@ app.secret_key = 'secret123'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'scendy1904'
-app.config['MYSQL_DB'] = 'crud_upload_db'
+app.config['MYSQL_DB'] = 'crud_kamar_kamar'
 app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif'}
 
