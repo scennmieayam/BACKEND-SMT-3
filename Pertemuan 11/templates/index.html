@@ -9,6 +9,14 @@
     <div class="container mt-4">
         <h2 class="mb-3">Daftar Kamar Hotel</h2>
         <a href="/add" class="btn btn-primary mb-3">Tambah Kamar</a>
+        
+        <form class="mb-3" method="get" action="/">
+            <div class="input-group">
+                <input type="text" name="search" value="{{ search_query }}" class="form-control" placeholder="Cari berdasarkan nomor kamar, tipe kamar, atau status">
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </div>
+        </form>
+        
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
                 <tr>
@@ -44,6 +52,28 @@
                 {% endfor %}
             </tbody>
         </table>
+        
+        <nav>
+            <ul class="pagination">
+                {% if page > 1 %}
+                <li class="page-item">
+                    <a class="page-link" href="?search={{ search_query }}&page={{ page - 1 }}">Previous</a>
+                </li>
+                {% endif %}
+                
+                {% for p in range(1, total_pages + 1) %}
+                <li class="page-item{% if p == page %} active{% endif %}">
+                    <a class="page-link" href="?search={{ search_query }}&page={{ p }}">{{ p }}</a>
+                </li>
+                {% endfor %}
+                
+                {% if page < total_pages %}
+                <li class="page-item">
+                    <a class="page-link" href="?search={{ search_query }}&page={{ page + 1 }}">Next</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 </body>
 </html>

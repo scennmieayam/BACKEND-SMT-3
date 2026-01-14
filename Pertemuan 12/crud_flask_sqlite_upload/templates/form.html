@@ -27,7 +27,9 @@
         <!-- FILE LAMA -->
         <div class="mb-3">
             <label>Gambar Barang</label>
+            {% if barang[5] %}
             <img src="/uploads/{{ barang[5] }}" width="150">
+            {% endif %}
         </div>
         <!-- PREVIEW FILE BARU -->
         <div class="mb-3">

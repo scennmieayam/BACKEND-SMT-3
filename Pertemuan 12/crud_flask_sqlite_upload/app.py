@@ -3,7 +3,7 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def get_db():

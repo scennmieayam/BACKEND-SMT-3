@@ -22,7 +22,13 @@
             <td>{{ b[2] }}</td>
             <td>{{ b[3] }}</td>
             <td>{{ b[4] }}</td>
-            <td><img src="/uploads/{{ b[5] }}" width="80"></td>
+            <td>
+                {% if b[5] %}
+                <img src="/uploads/{{ b[5] }}" width="80">
+                {% else %}
+                <span class="text-muted">-</span>
+                {% endif %}
+            </td>
             <td>
                 <a href="/edit/{{ b[0] }}" class="btn btn-warning btn-sm">Edit</a>
                 <a href="/hapus/{{ b[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data?')">Hapus</a>

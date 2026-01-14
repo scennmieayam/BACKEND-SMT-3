@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from werkzeug.utils import secure_filename
 import os
+import math
 
 app = Flask(__name__)
 
@@ -49,10 +50,30 @@ init_db()
 
 @app.route("/")
 def index():
+    search_query = request.args.get('search', '')
+    page = int(request.args.get('page', 1))
+    per_page = 5
+    offset = (page - 1) * per_page
+    
     conn = db()
-    rows = conn.execute("SELECT * FROM kamar").fetchall()
+    
+    if search_query:
+        count_result = conn.execute("SELECT COUNT(*) FROM kamar WHERE nomor_kamar LIKE ? OR tipe_kamar LIKE ? OR status LIKE ?", ('%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%')).fetchone()
+        total_rows = count_result[0]
+        rows = conn.execute("""
+            SELECT * FROM kamar
+            WHERE nomor_kamar LIKE ? OR tipe_kamar LIKE ? OR status LIKE ?
+            LIMIT ? OFFSET ?
+        """, ('%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%', per_page, offset)).fetchall()
+    else:
+        count_result = conn.execute("SELECT COUNT(*) FROM kamar").fetchone()
+        total_rows = count_result[0]
+        rows = conn.execute("SELECT * FROM kamar LIMIT ? OFFSET ?", (per_page, offset)).fetchall()
+    
+    total_pages = math.ceil(total_rows / per_page) if per_page > 0 else 1
     conn.close()
-    return render_template("index.html", kamars=rows)
+    
+    return render_template("index.html", kamars=rows, page=page, total_pages=total_pages, search_query=search_query)
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
